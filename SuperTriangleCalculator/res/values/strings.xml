@@ -4,9 +4,9 @@
     <string name="app_name">Smart Triangle Calculator</string>
     <string name="app_name_short">STC</string>
     <string name="action_help">Help</string>
-    <string name="calculate">calculate</string>
-    <string name="clear">clear</string>
-    <string name="explain">explain</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="explain">Explain</string>
     <string name="a">a</string>
     <string name="b">b</string>
     <string name="c">c</string>
@@ -29,7 +29,7 @@
     <string name="and">and</string>
     <string name="explanation">explanation</string>
     <string name="noExplanation">I didn\'t calculate anything yet!</string>
-    <string name="angle_unit">angle units</string>
+    <string name="angle_unit">Angle units</string>
     <string name="degrees">degrees</string>
     <string name="radians">radians</string>
     <string name="setToDegrees">"Angle units set to degrees</string>

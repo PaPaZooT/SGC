@@ -2,21 +2,19 @@ package matvidako.supertrianglecalculator;
 
 import java.util.HashMap;
 
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
  
 @SuppressLint("UseSparseArrays")
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity{
 	
 	HashMap<Integer, EditText> etMap = new HashMap<Integer, EditText>();
 	boolean inDegrees = true;
@@ -26,7 +24,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setTheme(android.R.style.Theme_Holo_Light); 
 		setContentView(R.layout.activity_main);
-		setupListeners();
 		setupEditTexts(); 
 		Explain.setup(this); 
 	}   
@@ -41,6 +38,15 @@ public class MainActivity extends Activity implements OnClickListener{
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.action_calculate:
+			calculate();
+			break;
+		case R.id.action_clear:
+			clear();
+			break;
+		case R.id.action_explain:
+			launchExplainDialog();
+			break;
 	    case R.id.action_help:
 	    	launchHelpDialog();
 	    	break;   
@@ -69,30 +75,6 @@ public class MainActivity extends Activity implements OnClickListener{
     	.show();
 	}
 
-
-	private void setupListeners() {
-		findViewById(R.id.btn_calculate).setOnClickListener(this);
-		findViewById(R.id.btn_clear).setOnClickListener(this);
-		findViewById(R.id.btn_explain).setOnClickListener(this);
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_calculate:
-			calculate();
-			break;
-		case R.id.btn_clear:
-			clear();
-			break;
-		case R.id.btn_explain:
-			launchExplainDialog();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	private void launchExplainDialog() {
 		String msg = getString(R.string.noExplanation);
 		if(!Explain.isEmpty()) msg = Explain.getExplanation();
