@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smart Triangle Calculator</string>
+    <string name="app_name_short">STC</string>
+    <string name="action_help">Help</string>
+    <string name="calculate">calculate</string>
+    <string name="clear">clear</string>
+    <string name="explain">explain</string>
+    <string name="a">a</string>
+    <string name="b">b</string>
+    <string name="c">c</string>
+    <string name="ha">ha</string>
+    <string name="hb">hb</string>
+    <string name="hc">hc</string>
+    <string name="area">A</string>
+    <string name="perimeter">P</string>
+    <string name="Rlong">circumscribed circle r</string>
+    <string name="rlong">inscribed circle r</string>
+    <string name="r">r</string>
+    <string name="R">R</string>
+    <string name="alpha">α</string>
+    <string name="beta">β</string>
+    <string name="gamma">γ</string>
+    <string name="doesNotCompute">impossible to calculate</string>
+    <string name="invalidTriangle">Invalid triangle. Check sides and angles.</string>
+    <string name="calculated">calculated</string>
+    <string name="using">using</string>
+    <string name="and">and</string>
+    <string name="explanation">explanation</string>
+    <string name="noExplanation">I didn\'t calculate anything yet!</string>
+    <string name="angle_unit">angle units</string>
+    <string name="degrees">degrees</string>
+    <string name="radians">radians</string>
+    <string name="setToDegrees">"Angle units set to degrees</string>
+    <string name="setToRadians">"Angle units set to radians</string>
+    <string name="ambiquous">ambiquous case, two triangles can be formed</string>
+    <string name="help">help</string>
+    <string name="helpText">        Input known values and tap CALCULATE.\nIf some values remain empty, it is possible that there is not enough data or that the triangle is invalid.\nTap EXPLAIN to see which formulas were used.\n\na, b, c - sides\nα, β, γ - angles\nha, hb, hc - height of a, b, c\nA - area\nP - perimeter\nr - radius of inscribed circle\nR - radius of circumscribed circle</string>
+    <string name="sides">sides</string>
+    <string name="heron_formula">Heron\'s formula</string>
+    <string name="side">side</string>
+    <string name="height">height</string>
+    <string name="angle">angle</string>
+    <string name="sine_law">law of sines</string>
+    <string name="cosine_law">law of cosines</string>
+    <string name="sum_of_angles">sum of angles</string>
+	<string name="semiperimeter">semiperimeter</string>
+    
+</resources>

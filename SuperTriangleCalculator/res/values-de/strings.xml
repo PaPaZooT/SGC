@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smart Triangle Calculator</string>
+    <string name="app_name_short">STC</string>
+    <string name="action_help">Hilfe</string>
+    <string name="calculate">Berechnen</string>
+    <string name="clear">Löschen</string>
+    <string name="explain">Erklären</string>
+    <string name="a">a</string>
+    <string name="b">b</string>
+    <string name="c">c</string>
+    <string name="ha">ha</string>
+    <string name="hb">hb</string>
+    <string name="hc">hc</string>
+    <string name="area">A</string>
+    <string name="perimeter">u</string>
+    <string name="Rlong">R von Umkreis</string>
+    <string name="rlong">r von Inkreis</string>
+    <string name="r">r</string>
+    <string name="R">R</string>
+    <string name="alpha">α</string>
+    <string name="beta">β</string>
+    <string name="gamma">γ</string>
+    <string name="doesNotCompute">Unmöglich zu berechnen</string>
+    <string name="invalidTriangle">Ein ungültiges Dreieck. Überprüfen Sie die Seiten und Winkel.</string>
+    <string name="calculated">Berechnet</string>
+    <string name="using">durch die Verwendung von</string>
+    <string name="and">und</string>
+    <string name="explanation">Erklärung</string>
+    <string name="noExplanation">Ich habe bis jetzt nichts berechnet!</string>
+    <string name="angle_unit">Maßeinheit für Winkel</string>
+    <string name="degrees">Grad</string>
+    <string name="radians">Radiant</string>
+    <string name="setToDegrees">"Maßeinheiten wurden auf Grad gestellt</string>
+    <string name="setToRadians">"Maßeinheiten wurden auf Radiant gestellt</string>
+    <string name="ambiquous">Ein zweideutiger Fall, zwei Dreiecke können gebildet werden</string>
+    <string name="help">Hilfe</string>
+    <string name="helpText">        Geben Sie die bekannten Werte ein und drücken Sie auf BERECHNEN.\nFalls einige Werte leer bleiben, geht es darum, dass es keine ausreichenden Daten gibt oder dass das Dreieck ungültig ist.\nDrücken Sie auf Erklären, um zu sehen, welche Formeln verwendet wurden.\n\na, b, c - Seiten\nα, β, γ - Winkel\nha, hb, hc - Höhe von a, b, c\nA - Fläche\nu - Umfang\nr - Inkreisradius\nR - Umkreisradius</string>
+    <string name="sides">Seiten</string>
+    <string name="heron_formula">Heronsche Formel</string>
+    <string name="side">Seite</string>
+    <string name="height">Höhe</string>
+    <string name="angle">Winkel</string>
+    <string name="sine_law">Sinussatz</string>
+    <string name="cosine_law">Kosinussatz</string>
+    <string name="sum_of_angles">Winkelsumme</string>
+    <string name="semiperimeter">halber Umfang</string>
+
+</resources>

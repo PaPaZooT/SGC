@@ -1,0 +1,287 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_calculate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/calculate" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/clear" />
+
+        <Button
+            android:id="@+id/btn_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/explain" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/a"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_a"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/alpha"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_alpha"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/ha"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_ha"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/b"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_b"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/beta"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_beta"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/hb"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_hb"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/c"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_c"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/gamma"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_gamma"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/hc"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_hc"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/area"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_area"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/r"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_r"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/perimeter"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_perimiter"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/R"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_R"
+            android:layout_width="@dimen/et_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number" >
+        </EditText>
+    </LinearLayout>
+
+</LinearLayout>
