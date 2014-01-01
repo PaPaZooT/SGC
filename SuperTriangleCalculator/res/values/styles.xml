@@ -1,20 +1,32 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light"></style>
+
+    <style name="AppTheme" parent="AppBaseTheme"></style>
+
+    <style name="divider_vertical">
+        <item name="android:background">@android:color/holo_blue_dark</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="header_calculator">
+        <item name="android:background">@android:color/holo_blue_dark</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_normal</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
+    </style>
+
+    <style name="grid_calculator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:columnWidth">@dimen/column_width_calculator_grid</item>
+        <item name="android:stretchMode">columnWidth</item>
+        <item name="android:horizontalSpacing">@dimen/spacing_calculator_grid</item>
+        <item name="android:verticalSpacing">@dimen/spacing_calculator_grid</item>
+        <item name="android:layout_margin">@dimen/padding_normal</item>
     </style>
 
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/calculator_grid_default"
+        style="@style/grid_calculator"
+         >
+    </GridView>
+
+    <TextView
+        android:id="@+id/calculator_header_known"
+        style="@style/header_calculator"
+        android:text="@string/known" />
+
+    <GridView
+        android:id="@+id/calculator_grid_known"
+        style="@style/grid_calculator" >
+    </GridView>
+
+    <TextView
+        android:id="@+id/calculator_header_calculated"
+        style="@style/header_calculator"
+        android:text="@string/calculated" />
+
+    <GridView
+        android:id="@+id/calculator_grid_calculated"
+        style="@style/grid_calculator" >
+    </GridView>
+
+    <TextView
+        android:id="@+id/calculator_header_couldnt_calculate"
+        style="@style/header_calculator"
+        android:text="@string/couldnt_calculate" />
+
+    <GridView
+        android:id="@+id/calculator_grid_couldnt_calculate"
+        style="@style/grid_calculator" >
+    </GridView>
+
+</LinearLayout>

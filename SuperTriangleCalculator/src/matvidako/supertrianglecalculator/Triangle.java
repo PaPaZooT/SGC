@@ -1,22 +1,83 @@
 package matvidako.supertrianglecalculator;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 
 //TODO equilateral triangle checks...
 public class Triangle {
 
+	public static interface Properties{
+		public static final String a = "a", b = "b", c = "c";
+		public static final String ha = "ha", hb = "hb", hc = "hc";
+		public static final String alpha = "alpha", beta = "beta", gamma = "gamma";
+		public static final String r = "r", R = "R";
+		public static final String P = "P", A = "A";
+	}
+	
 	// -1 means not set
-	private double[] sides = new double[3];
-	private double[] heights = new double[3];
-	private double[] angles = new double[3]; // in deg, rad would break isSet checks
-	private double A, P;
-	private double r, rCircumscribed;
+	private double[] sides = new double[]{-1, -1, -1};
+	private double[] heights = new double[]{-1, -1, -1};
+	private double[] angles = new double[]{-1, -1, -1}; // in deg, rad would break isSet checks
+	private double A = -1, P = -1;
+	private double r = -1, rCircumscribed = -1;
 	private final double sumAngles = 180;
 
 	private boolean inDegrees;
 
 	private Context context;
 
+	private ArrayList<ShapeProperty> properties = new ArrayList<ShapeProperty>();
+	
+	public Triangle(ArrayList<ShapeProperty> properties, boolean inDegrees, Context context){
+		for(ShapeProperty p : properties){
+			String name= p.getName();
+			if(name.equals(Properties.a)){
+				sides[0] = p.getValue();
+			} else if(name.equals(Properties.b)){
+				sides[1] = p.getValue();
+			} else if(name.equals(Properties.b)){
+				sides[1] = p.getValue();
+			} else if(name.equals(Properties.c)){
+				sides[2] = p.getValue();
+			} else if(name.equals(Properties.ha)){
+				heights[0] = p.getValue();
+			} else if(name.equals(Properties.hb)){
+				heights[1] = p.getValue();
+			} else if(name.equals(Properties.hc)){
+				heights[2] = p.getValue();
+			} else if(name.equals(Properties.alpha)){
+				angles[0] = p.getValue();
+			} else if(name.equals(Properties.beta)){
+				angles[1] = p.getValue();
+			} else if(name.equals(Properties.gamma)){
+				angles[2] = p.getValue();
+			} else if(name.equals(Properties.r)){
+				r = p.getValue();
+			} else if(name.equals(Properties.R)){
+				rCircumscribed = p.getValue();
+			} else if(name.equals(Properties.A)){
+				A = p.getValue();
+			} else if(name.equals(Properties.P)){
+				P = p.getValue();
+			}
+		}
+		
+		this.inDegrees = inDegrees;
+		if (!inDegrees) {
+			for (int i = 0; i < 3; i++) {
+				if (isSet(angles[i]))
+					angles[i] = Math.toDegrees(angles[i]);
+			}
+		}
+		this.context = context;
+	}
+	
+	public ArrayList<ShapeProperty> getProperties(){
+		return properties;
+	}
+	
+	/*
 	public Triangle(String a, String b, String c, String ha, String hb,
 			String hc, String alpha, String beta, String gamma, String A,
 			String P, String r, String R, boolean inDegrees, Context context) {
@@ -46,7 +107,7 @@ public class Triangle {
 		this.P = toDoubleOrMinusOne(P);
 		this.r = toDoubleOrMinusOne(r);
 		this.rCircumscribed = toDoubleOrMinusOne(R);
-	}
+	}*/
 
 	public boolean isValid() {
 		return sidesValid() && anglesValid();
@@ -77,8 +138,29 @@ public class Triangle {
 			anyCalc = anyCalc || calculater();
 			anyCalc = anyCalc || calculateR();
 		} while (anyCalc);
+		packProperties();
 	}
 
+	private void packProperties(){
+		properties.clear();
+		properties.add(new ShapeProperty(Properties.a, sides[0]));
+		properties.add(new ShapeProperty(Properties.b, sides[1]));
+		properties.add(new ShapeProperty(Properties.c, sides[2]));
+		
+		properties.add(new ShapeProperty(Properties.ha, heights[0]));
+		properties.add(new ShapeProperty(Properties.hb, heights[1]));
+		properties.add(new ShapeProperty(Properties.hc, heights[2]));
+		
+		properties.add(new ShapeProperty(Properties.alpha, angles[0]));
+		properties.add(new ShapeProperty(Properties.beta, angles[1]));
+		properties.add(new ShapeProperty(Properties.gamma, angles[2]));
+		
+		properties.add(new ShapeProperty(Properties.A, A));
+		properties.add(new ShapeProperty(Properties.P, P));
+		properties.add(new ShapeProperty(Properties.r, r));
+		properties.add(new ShapeProperty(Properties.R, rCircumscribed));
+	}
+	
 	private boolean calculateSides() {
 		boolean anyCalc = false;
 		for (int i = 0; i < 3; i++) {
@@ -412,6 +494,7 @@ public class Triangle {
 		return -1;
 	}
 
+	/*
 	private double toDoubleOrMinusOne(String s) {
 		double n;
 		try {
@@ -420,7 +503,7 @@ public class Triangle {
 		} catch (Exception e) {
 			return -1;
 		}
-	}
+	}*/
 
 	private String toStringOrDoesNotCompute(double d) {
 		if (isSet(d))

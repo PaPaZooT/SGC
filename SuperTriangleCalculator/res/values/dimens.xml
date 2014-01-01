@@ -7,5 +7,10 @@
 	<dimen name="et_width">100dp</dimen>
 	<dimen name="tv_width">25dp</dimen>
 	
+	<dimen name="padding_small">6dp</dimen>
+	<dimen name="padding_normal">12dp</dimen>
+	<dimen name="column_width_calculator_grid">100dp</dimen>
+	<dimen name="spacing_calculator_grid">6dp</dimen>
+	<dimen name="calculator_grid_height">60dp</dimen>
 	
 </resources>

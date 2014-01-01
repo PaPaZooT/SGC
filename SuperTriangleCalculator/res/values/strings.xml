@@ -24,7 +24,7 @@
     <string name="gamma">γ</string>
     <string name="doesNotCompute">impossible to calculate</string>
     <string name="invalidTriangle">Invalid triangle. Check sides and angles.</string>
-    <string name="calculated">calculated</string>
+    <string name="calculated">Calculated</string>
     <string name="using">using</string>
     <string name="and">and</string>
     <string name="explanation">explanation</string>
@@ -45,6 +45,10 @@
     <string name="sine_law">law of sines</string>
     <string name="cosine_law">law of cosines</string>
     <string name="sum_of_angles">sum of angles</string>
-	<string name="semiperimeter">semiperimeter</string>
-    
+    <string name="semiperimeter">semiperimeter</string>
+
+    <string name="known">Inputed</string>
+    <string name="couldnt_calculate">Couldn\'t calculate</string>
+    <string name="value">Value</string>
+
 </resources>
