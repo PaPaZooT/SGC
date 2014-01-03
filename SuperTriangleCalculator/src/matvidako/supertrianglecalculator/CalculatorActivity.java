@@ -161,10 +161,10 @@ public class CalculatorActivity extends Activity {
 			clear();
 			break;
 		case R.id.action_explain:
-			launchExplainDialog();
+			DialogLauncher.launchExplainDialog(this);
 			break;
 		case R.id.action_help:
-			launchHelpDialog();
+			DialogLauncher.launchHelpDialog(this, getString(R.string.help), getString(R.string.helpText));
 			break;
 		case R.id.action_degrees:
 			inDegrees = true;
@@ -180,29 +180,6 @@ public class CalculatorActivity extends Activity {
 			break;
 		}
 		return true;
-	}
-
-	private void launchHelpDialog() {
-		new AlertDialog.Builder(this).setTitle(getString(R.string.help))
-				.setMessage(getString(R.string.helpText))
-				.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				}).show();
-	}
-
-	private void launchExplainDialog() {
-		String msg = getString(R.string.noExplanation);
-		if (!Explain.isEmpty())
-			msg = Explain.getExplanation();
-		new AlertDialog.Builder(this).setMessage(msg)
-				.setTitle(R.string.explanation)
-				.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				}).show();
 	}
 
 	private void calculate() {
