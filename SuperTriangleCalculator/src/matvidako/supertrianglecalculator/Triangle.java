@@ -10,7 +10,7 @@ public class Triangle {
 	public static interface Properties{
 		public static final String a = "a", b = "b", c = "c";
 		public static final String ha = "ha", hb = "hb", hc = "hc";
-		public static final String alpha = "alpha", beta = "beta", gamma = "gamma";
+		public static final String alpha = "α", beta = "β", gamma = "γ";
 		public static final String r = "r", R = "R";
 		public static final String P = "P", A = "A";
 	}

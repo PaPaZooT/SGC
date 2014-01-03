@@ -15,7 +15,7 @@ public class Utils {
 	
 	public static void hideKeyboard(View view, Context context){
 		InputMethodManager inputMethodManager=(InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 	
 	public static <T> void addOrUpdate(ArrayList<T> list, T item){

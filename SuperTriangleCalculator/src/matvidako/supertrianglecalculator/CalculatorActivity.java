@@ -4,32 +4,27 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
 @SuppressLint("UseSparseArrays")
 public class CalculatorActivity extends Activity {
 
-	// HashMap<Integer, EditText> etMap = new HashMap<Integer, EditText>();
 	boolean inDegrees = true;
 
-	//private ArrayList<ShapeProperty> propertiesInDefault = new ArrayList<ShapeProperty>();
-	//private ArrayList<ShapeProperty> propertiesInKnown = new ArrayList<ShapeProperty>();
-	//private ArrayList<ShapeProperty> propertiesInCalculated = new ArrayList<ShapeProperty>();
-	//private ArrayList<ShapeProperty> propertiesInCantCalculate = new ArrayList<ShapeProperty>();
-	
 	private GridView gridDefault, gridKnown, gridCalculated, gridCantCalculate;
 	private View headerKnown, headerCalculated, headerCantCalculate;
-	GridItemAdapter adapterDefault, adapterKnown, adapterCalculated, adapterCantCalculate;
-	
+	private GridItemAdapter adapterDefault, adapterKnown, adapterCalculated,
+			adapterCantCalculate;
+
+	private ArrayList<ShapeProperty> allProperties,
+			inputedProperties = new ArrayList<ShapeProperty>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,72 +51,79 @@ public class CalculatorActivity extends Activity {
 		headerCalculated = findViewById(R.id.calculator_header_calculated);
 		headerCantCalculate = findViewById(R.id.calculator_header_couldnt_calculate);
 	}
-	
-	private class MovePropertyChangeListener implements OnPropertyChangeListener{
+
+	private class MovePropertyChangeListener implements
+			OnPropertyChangeListener {
 
 		private GridItemAdapter from;
 		private GridItemAdapter to;
-		
-		public MovePropertyChangeListener(GridItemAdapter from, GridItemAdapter to){
+
+		public MovePropertyChangeListener(GridItemAdapter from,
+				GridItemAdapter to) {
 			this.from = from;
 			this.to = to;
 		}
-		
+
 		@Override
 		public void propertyChanged(ShapeProperty property) {
-			from.removeItem(property);
-			to.addItem(property);
-			updateGridsVisibility();
+			// from.removeItem(property);
+			// to.addItem(property);
+			// updateGridsVisibility();
+			Utils.addOrUpdate(inputedProperties, property);
+			//inputedProperties.add(property);
 		}
 	}
-	
-	private void setupAdapters(){
+
+	private void setupAdapters() {
 		adapterDefault = new GridItemAdapter(this);
 		gridDefault.setAdapter(adapterDefault);
 		gridDefault.setOnItemClickListener(adapterDefault);
-		
+
 		adapterKnown = new GridItemAdapter(this);
 		gridKnown.setAdapter(adapterKnown);
 		gridKnown.setOnItemClickListener(adapterKnown);
-		
+
 		adapterCalculated = new GridItemAdapter(this);
 		gridCalculated.setAdapter(adapterCalculated);
 		gridCalculated.setOnItemClickListener(adapterCalculated);
-		
+
 		adapterCantCalculate = new GridItemAdapter(this);
 		gridCantCalculate.setAdapter(adapterCantCalculate);
 		gridCantCalculate.setOnItemClickListener(adapterCantCalculate);
-		
-		adapterDefault.setOnPropertyChangeListener(new MovePropertyChangeListener(adapterDefault, adapterKnown));
-		adapterCantCalculate.setOnPropertyChangeListener(new MovePropertyChangeListener(adapterCantCalculate, adapterKnown));
+
+		adapterDefault
+				.setOnPropertyChangeListener(new MovePropertyChangeListener(
+						adapterDefault, adapterKnown));
+		adapterCantCalculate
+				.setOnPropertyChangeListener(new MovePropertyChangeListener(
+						adapterCantCalculate, adapterKnown));
 	}
 
 	private void resetGridViews() {
-		ArrayList<ShapeProperty> triangleProperties = new ArrayList<ShapeProperty>();
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.a));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.b));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.c));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.ha));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.hb));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.hc));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.alpha));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.beta));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.gamma));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.r));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.R));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.P));
-		triangleProperties.add(new ShapeProperty(Triangle.Properties.A));
+		allProperties = new ArrayList<ShapeProperty>();
+		allProperties.add(new ShapeProperty(Triangle.Properties.a));
+		allProperties.add(new ShapeProperty(Triangle.Properties.b));
+		allProperties.add(new ShapeProperty(Triangle.Properties.c));
+		allProperties.add(new ShapeProperty(Triangle.Properties.ha));
+		allProperties.add(new ShapeProperty(Triangle.Properties.hb));
+		allProperties.add(new ShapeProperty(Triangle.Properties.hc));
+		allProperties.add(new ShapeProperty(Triangle.Properties.alpha));
+		allProperties.add(new ShapeProperty(Triangle.Properties.beta));
+		allProperties.add(new ShapeProperty(Triangle.Properties.gamma));
+		allProperties.add(new ShapeProperty(Triangle.Properties.r));
+		allProperties.add(new ShapeProperty(Triangle.Properties.R));
+		allProperties.add(new ShapeProperty(Triangle.Properties.P));
+		allProperties.add(new ShapeProperty(Triangle.Properties.A));
 
-		
 		adapterDefault.clearItems();
-		adapterDefault.addItems(triangleProperties);
+		adapterDefault.addItems(allProperties);
 		adapterCalculated.clearItems();
 		adapterCantCalculate.clearItems();
 		adapterKnown.clearItems();
 
 		updateGridsVisibility();
 	}
-	
+
 	private void updateGridsVisibility() {
 		if (adapterDefault.isEmpty()) {
 			gridDefault.setVisibility(View.GONE);
@@ -156,15 +158,18 @@ public class CalculatorActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.action_calculate:
 			calculate();
+			Utils.hideKeyboard(gridCalculated, this);
 			break;
 		case R.id.action_clear:
 			clear();
+			Utils.hideKeyboard(gridCalculated, this);
 			break;
 		case R.id.action_explain:
 			DialogLauncher.launchExplainDialog(this);
 			break;
 		case R.id.action_help:
-			DialogLauncher.launchHelpDialog(this, getString(R.string.help), getString(R.string.helpText));
+			DialogLauncher.launchHelpDialog(this, getString(R.string.help),
+					getString(R.string.helpText));
 			break;
 		case R.id.action_degrees:
 			inDegrees = true;
@@ -184,7 +189,7 @@ public class CalculatorActivity extends Activity {
 
 	private void calculate() {
 		Explain.clear();
-		Triangle triangle = new Triangle(adapterKnown.getItems(), inDegrees, this);
+		Triangle triangle = new Triangle(inputedProperties, inDegrees, this);
 		triangle.calculateAll();
 
 		if (triangle.isValid()) {
@@ -192,22 +197,23 @@ public class CalculatorActivity extends Activity {
 			adapterDefault.clearItems();
 			adapterCantCalculate.clearItems();
 			for (ShapeProperty p : properties) {
-				if (!p.isValid()) {
+				if (inputedProperties.contains(p)) {
+					adapterKnown.updateItem(p);
+				} else if (!p.isValid()) {
 					adapterCantCalculate.updateItem(p);
-				} else {
-					if (!adapterKnown.contains(p)) {
-						adapterCalculated.updateItem(p);
-					}
+				} else if (!adapterKnown.contains(p)) {
+					adapterCalculated.updateItem(p);
 				}
 			}
 			updateGridsVisibility();
-		}
-		else
+		} else {
 			Toast.makeText(this, getString(R.string.invalidTriangle),
 					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	private void clear() {
+		inputedProperties.clear();
 		resetGridViews();
 	}
 

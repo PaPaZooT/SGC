@@ -4,6 +4,7 @@ public class ShapeProperty {
 
 	private String name;
 	private double value;
+	int decimalPlaces = 4;//TOOD settings 
 	
 	public ShapeProperty(String name){
 		this.name = name;
@@ -20,7 +21,7 @@ public class ShapeProperty {
 	}
 
 	public double getValue() {
-		return value;
+		return roundValue();
 	}
 
 	public void setValue(double value) {
@@ -40,5 +41,9 @@ public class ShapeProperty {
             return false;
         ShapeProperty other = (ShapeProperty) obj;
         return name.equals(other.getName());
+	}
+	
+	private double roundValue(){
+		return Math.round( value * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces);//TODO refactor if needed
 	}
 }
