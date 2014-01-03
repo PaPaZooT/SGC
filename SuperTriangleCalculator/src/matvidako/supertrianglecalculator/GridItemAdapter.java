@@ -24,10 +24,38 @@ public class GridItemAdapter extends BaseAdapter implements OnItemClickListener{
 	private Context context;
 	private OnPropertyChangeListener onPropertyChangeListener = null;
 	
-	public GridItemAdapter(Context context, ArrayList<ShapeProperty> properties){
+	public GridItemAdapter(Context context){
 		this.context = context;
 		inflater = LayoutInflater.from(context);
-		this.properties = properties;
+	}
+	
+	public void addItem(ShapeProperty property){
+		properties.add(property);
+		this.notifyDataSetChanged();
+	}
+	
+	public void addItems(ArrayList<ShapeProperty> properties){
+		this.properties.addAll(properties);
+		this.notifyDataSetChanged();
+	}
+	
+	public void removeItem(ShapeProperty property){
+		properties.remove(property);
+		this.notifyDataSetChanged();
+	}
+	
+	public void clearItems(){
+		properties.clear();
+		this.notifyDataSetChanged();
+	}
+	
+	public boolean contains(ShapeProperty property){
+		return properties.contains(property);
+	}
+	
+	public void updateItem(ShapeProperty property){
+		Utils.addOrUpdate(properties, property);
+		this.notifyDataSetChanged();
 	}
 	
 	public void setOnPropertyChangeListener(OnPropertyChangeListener listener){
@@ -44,6 +72,10 @@ public class GridItemAdapter extends BaseAdapter implements OnItemClickListener{
 		return properties.get(pos);
 	}
 
+	public ArrayList<ShapeProperty> getItems(){
+		return properties;
+	}
+	
 	@Override
 	public long getItemId(int pos) {
 		return 0;
@@ -81,20 +113,27 @@ public class GridItemAdapter extends BaseAdapter implements OnItemClickListener{
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				if(!hasFocus){
+					//property.setValue(Double.parseDouble(et.getText().toString()));
 					switchViewVisibility(true, view);
 				}
 			}
 		});
 		
+		updateValueLabel(view, pos);
+		return view;
+	}
+
+	private void updateValueLabel(View view, int pos){
+		ShapeProperty property = getItem(pos);
+		TextView tv = (TextView) view.findViewById(R.id.grid_item_text_view);
+		EditText et = (EditText) view.findViewById(R.id.grid_item_edit_text);
 		if(property.getValue() > -1){
 			String value = String.valueOf(property.getValue());
 			tv.setText(tv.getText() + " = " + value);
 			et.setText(value);
 		}
-		
-		return view;
 	}
-
+	
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
 		boolean isLabelShown = (Boolean) view.getTag();

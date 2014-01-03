@@ -16,25 +16,26 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 @SuppressLint("UseSparseArrays")
-public class MainActivity extends Activity {
+public class CalculatorActivity extends Activity {
 
 	// HashMap<Integer, EditText> etMap = new HashMap<Integer, EditText>();
 	boolean inDegrees = true;
 
-	private ArrayList<ShapeProperty> propertiesInDefault = new ArrayList<ShapeProperty>();
-	private ArrayList<ShapeProperty> propertiesInKnown = new ArrayList<ShapeProperty>();
-	private ArrayList<ShapeProperty> propertiesInCalculated = new ArrayList<ShapeProperty>();
-	private ArrayList<ShapeProperty> propertiesInCantCalculate = new ArrayList<ShapeProperty>();
-
+	//private ArrayList<ShapeProperty> propertiesInDefault = new ArrayList<ShapeProperty>();
+	//private ArrayList<ShapeProperty> propertiesInKnown = new ArrayList<ShapeProperty>();
+	//private ArrayList<ShapeProperty> propertiesInCalculated = new ArrayList<ShapeProperty>();
+	//private ArrayList<ShapeProperty> propertiesInCantCalculate = new ArrayList<ShapeProperty>();
+	
 	private GridView gridDefault, gridKnown, gridCalculated, gridCantCalculate;
 	private View headerKnown, headerCalculated, headerCantCalculate;
-
+	GridItemAdapter adapterDefault, adapterKnown, adapterCalculated, adapterCantCalculate;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calculator);
 		setupViews();
-		// setupEditTexts();
+		setupAdapters();
 		Explain.setup(this);
 		resetGridViews();
 	}
@@ -55,6 +56,45 @@ public class MainActivity extends Activity {
 		headerCalculated = findViewById(R.id.calculator_header_calculated);
 		headerCantCalculate = findViewById(R.id.calculator_header_couldnt_calculate);
 	}
+	
+	private class MovePropertyChangeListener implements OnPropertyChangeListener{
+
+		private GridItemAdapter from;
+		private GridItemAdapter to;
+		
+		public MovePropertyChangeListener(GridItemAdapter from, GridItemAdapter to){
+			this.from = from;
+			this.to = to;
+		}
+		
+		@Override
+		public void propertyChanged(ShapeProperty property) {
+			from.removeItem(property);
+			to.addItem(property);
+			updateGridsVisibility();
+		}
+	}
+	
+	private void setupAdapters(){
+		adapterDefault = new GridItemAdapter(this);
+		gridDefault.setAdapter(adapterDefault);
+		gridDefault.setOnItemClickListener(adapterDefault);
+		
+		adapterKnown = new GridItemAdapter(this);
+		gridKnown.setAdapter(adapterKnown);
+		gridKnown.setOnItemClickListener(adapterKnown);
+		
+		adapterCalculated = new GridItemAdapter(this);
+		gridCalculated.setAdapter(adapterCalculated);
+		gridCalculated.setOnItemClickListener(adapterCalculated);
+		
+		adapterCantCalculate = new GridItemAdapter(this);
+		gridCantCalculate.setAdapter(adapterCantCalculate);
+		gridCantCalculate.setOnItemClickListener(adapterCantCalculate);
+		
+		adapterDefault.setOnPropertyChangeListener(new MovePropertyChangeListener(adapterDefault, adapterKnown));
+		adapterCantCalculate.setOnPropertyChangeListener(new MovePropertyChangeListener(adapterCantCalculate, adapterKnown));
+	}
 
 	private void resetGridViews() {
 		ArrayList<ShapeProperty> triangleProperties = new ArrayList<ShapeProperty>();
@@ -72,68 +112,37 @@ public class MainActivity extends Activity {
 		triangleProperties.add(new ShapeProperty(Triangle.Properties.P));
 		triangleProperties.add(new ShapeProperty(Triangle.Properties.A));
 
-		propertiesInDefault.clear();
-		propertiesInDefault.addAll(triangleProperties);
-
-		propertiesInCalculated.clear();
-		propertiesInCantCalculate.clear();
-		propertiesInKnown.clear();
-
-		GridItemAdapter adapter = new GridItemAdapter(this, propertiesInDefault);
-		adapter.setOnPropertyChangeListener(new OnPropertyChangeListener() {
-
-			@Override
-			public void propertyChanged(ShapeProperty property) {
-				addKnownProperty(property);
-			}
-		});
-		gridDefault.setAdapter(adapter);
-		gridDefault.setOnItemClickListener(adapter);
-
-		adapter = new GridItemAdapter(this, propertiesInCalculated);
-		gridCalculated.setOnItemClickListener(adapter);
-		gridCalculated.setAdapter(adapter);
-
-		adapter = new GridItemAdapter(this, propertiesInCantCalculate);
-		gridCantCalculate.setOnItemClickListener(adapter);
-		gridCantCalculate.setAdapter(adapter);
 		
-		adapter = new GridItemAdapter(this, propertiesInKnown);
-		gridKnown.setOnItemClickListener(adapter);
-		gridKnown.setAdapter(adapter);
+		adapterDefault.clearItems();
+		adapterDefault.addItems(triangleProperties);
+		adapterCalculated.clearItems();
+		adapterCantCalculate.clearItems();
+		adapterKnown.clearItems();
 
 		updateGridsVisibility();
 	}
-
-	public void addKnownProperty(ShapeProperty property) {
-		propertiesInDefault.remove(property);
-		propertiesInKnown.add(property);
-		((BaseAdapter) gridDefault.getAdapter()).notifyDataSetChanged();
-		((BaseAdapter) gridKnown.getAdapter()).notifyDataSetChanged();
-		updateGridsVisibility();
-	}
-
+	
 	private void updateGridsVisibility() {
-		if (propertiesInDefault.isEmpty()) {
+		if (adapterDefault.isEmpty()) {
 			gridDefault.setVisibility(View.GONE);
 		} else {
 			gridDefault.setVisibility(View.VISIBLE);
 		}
-		if (propertiesInCalculated.isEmpty()) {
+		if (adapterCalculated.isEmpty()) {
 			gridCalculated.setVisibility(View.GONE);
 			headerCalculated.setVisibility(View.GONE);
 		} else {
 			gridCalculated.setVisibility(View.VISIBLE);
 			headerCalculated.setVisibility(View.VISIBLE);
 		}
-		if (propertiesInKnown.isEmpty()) {
+		if (adapterKnown.isEmpty()) {
 			gridKnown.setVisibility(View.GONE);
 			headerKnown.setVisibility(View.GONE);
 		} else {
 			gridKnown.setVisibility(View.VISIBLE);
 			headerKnown.setVisibility(View.VISIBLE);
 		}
-		if (propertiesInCantCalculate.isEmpty()) {
+		if (adapterCantCalculate.isEmpty()) {
 			gridCantCalculate.setVisibility(View.GONE);
 			headerCantCalculate.setVisibility(View.GONE);
 		} else {
@@ -198,93 +207,31 @@ public class MainActivity extends Activity {
 
 	private void calculate() {
 		Explain.clear();
-		Triangle triangle = new Triangle(propertiesInKnown, inDegrees, this);
-
-		/*
-		 * Triangle triangle = new Triangle(getEditTextStringById(R.id.et_a),
-		 * getEditTextStringById(R.id.et_b), getEditTextStringById(R.id.et_c),
-		 * getEditTextStringById(R.id.et_ha), getEditTextStringById(R.id.et_hb),
-		 * getEditTextStringById(R.id.et_hc),
-		 * getEditTextStringById(R.id.et_alpha),
-		 * getEditTextStringById(R.id.et_beta),
-		 * getEditTextStringById(R.id.et_gamma),
-		 * getEditTextStringById(R.id.et_area),
-		 * getEditTextStringById(R.id.et_perimiter),
-		 * getEditTextStringById(R.id.et_r), getEditTextStringById(R.id.et_R),
-		 * inDegrees, this);
-		 */
-
+		Triangle triangle = new Triangle(adapterKnown.getItems(), inDegrees, this);
 		triangle.calculateAll();
 
 		if (triangle.isValid()) {
 			ArrayList<ShapeProperty> properties = triangle.getProperties();
-			propertiesInDefault.clear();
+			adapterDefault.clearItems();
+			adapterCantCalculate.clearItems();
 			for (ShapeProperty p : properties) {
 				if (!p.isValid()) {
-					propertiesInCantCalculate.add(p);
+					adapterCantCalculate.updateItem(p);
 				} else {
-					if (!propertiesInKnown.contains(p)) {
-						propertiesInCalculated.add(p);
+					if (!adapterKnown.contains(p)) {
+						adapterCalculated.updateItem(p);
 					}
 				}
 			}
 			updateGridsVisibility();
 		}
-		// setTriangleData(triangle);
 		else
 			Toast.makeText(this, getString(R.string.invalidTriangle),
 					Toast.LENGTH_LONG).show();
 	}
 
-	/*
-	 * private void setTriangleData(Triangle triangle) {
-	 * setEditTextStringById(R.id.et_a, triangle.getA());
-	 * setEditTextStringById(R.id.et_b, triangle.getB());
-	 * setEditTextStringById(R.id.et_c, triangle.getC());
-	 * 
-	 * setEditTextStringById(R.id.et_area, triangle.getArea());
-	 * setEditTextStringById(R.id.et_perimiter, triangle.getPerimeter());
-	 * 
-	 * setEditTextStringById(R.id.et_ha, triangle.getHa());
-	 * setEditTextStringById(R.id.et_hb, triangle.getHb());
-	 * setEditTextStringById(R.id.et_hc, triangle.getHc());
-	 * 
-	 * setEditTextStringById(R.id.et_alpha, triangle.getAlpha());
-	 * setEditTextStringById(R.id.et_beta, triangle.getBeta());
-	 * setEditTextStringById(R.id.et_gamma, triangle.getGamma());
-	 * 
-	 * setEditTextStringById(R.id.et_r, triangle.getr());
-	 * setEditTextStringById(R.id.et_R, triangle.getR()); }
-	 */
-	/*
-	 * private String getEditTextStringById(int id) { return
-	 * etMap.get(id).getText().toString(); }
-	 * 
-	 * private void setEditTextStringById(int id, String text) {
-	 * etMap.get(id).setText(text); }
-	 */
-
 	private void clear() {
 		resetGridViews();
-		/*
-		 * for (int k : etMap.keySet()) etMap.get(k).setText("");
-		 */
 	}
 
-	/*
-	 * private void setupEditTexts() { EditText et; et = (EditText)
-	 * findViewById(R.id.et_a); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_b); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_c); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_ha); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_hb); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_hc); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_alpha); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_beta); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_gamma); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_area); etMap.put(et.getId(), et); et = (EditText)
-	 * findViewById(R.id.et_perimiter); etMap.put(et.getId(), et); et =
-	 * (EditText) findViewById(R.id.et_r); etMap.put(et.getId(), et); et =
-	 * (EditText) findViewById(R.id.et_R); etMap.put(et.getId(), et); }
-	 */
 }

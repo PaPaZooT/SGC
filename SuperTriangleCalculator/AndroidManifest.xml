@@ -14,7 +14,7 @@
         android:label="@string/app_name_short"
         >
         <activity
-            android:name="matvidako.supertrianglecalculator.MainActivity"
+            android:name="matvidako.supertrianglecalculator.CalculatorActivity"
             android:label="@string/app_name_short"
             android:uiOptions="splitActionBarWhenNarrow"
             android:theme="@style/AppTheme"
