@@ -1,4 +1,4 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.shapes;
 
 public class ShapeProperty {
 

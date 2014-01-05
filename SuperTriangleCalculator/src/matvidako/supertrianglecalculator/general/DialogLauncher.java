@@ -1,5 +1,7 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.general;
 
+import matvidako.supertrianglecalculator.R;
+import matvidako.supertrianglecalculator.calculator.Explain;
 import android.app.AlertDialog;
 import android.content.Context;
 

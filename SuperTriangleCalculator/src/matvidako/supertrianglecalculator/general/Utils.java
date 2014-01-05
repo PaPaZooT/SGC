@@ -1,4 +1,4 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.general;
 
 import java.util.ArrayList;
 

@@ -12,5 +12,7 @@
 	<dimen name="column_width_calculator_grid">100dp</dimen>
 	<dimen name="spacing_calculator_grid">6dp</dimen>
 	<dimen name="calculator_grid_height">60dp</dimen>
-	
+	<dimen name="main_grid_height">100dp</dimen>
+	<dimen name="main_icon_size">48dp</dimen>
+	<dimen name="column_width_main">100dp</dimen>
 </resources>

@@ -50,5 +50,10 @@
     <string name="known">Inputed</string>
     <string name="couldnt_calculate">Couldn\'t calculate</string>
     <string name="value">Value</string>
-
+    
+    <!-- main menu -->
+	<string name="triangle">Triangle</string>
+	<string name="rectangle">Rectangle</string>
+	<string name="circle">Circle</string>
+	
 </resources>

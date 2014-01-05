@@ -1,7 +1,10 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.shapes;
 
 import java.util.ArrayList;
 
+import matvidako.supertrianglecalculator.R;
+import matvidako.supertrianglecalculator.calculator.Explain;
+import matvidako.supertrianglecalculator.general.UtilsMath;
 import android.content.Context;
 
 //TODO equilateral triangle checks...
@@ -122,7 +125,7 @@ public class Triangle {
 		return angles[0] + angles[1] < sumAngles &&
 				angles[0] + angles[2] < sumAngles &&
 				angles[1] + angles[2] < sumAngles &&
-				(!allSet(angles[0], angles[1], angles[2]) || Utility
+				(!allSet(angles[0], angles[1], angles[2]) || UtilsMath
 				.equalDouble(angles[0] + angles[1] + angles[2], sumAngles));
 	}
 

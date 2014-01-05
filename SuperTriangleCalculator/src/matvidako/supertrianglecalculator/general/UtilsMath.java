@@ -1,6 +1,6 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.general;
 
-public class Utility {
+public class UtilsMath {
 	static double epsilon = 0.001;
 	
 	public static boolean equalDouble(double a, double b){

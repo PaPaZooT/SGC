@@ -1,7 +1,8 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.calculator;
 
 import java.util.HashMap;
 
+import matvidako.supertrianglecalculator.R;
 import android.content.Context;
 
 public class Explain {

@@ -1,7 +1,10 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.shapes;
 
 import java.util.ArrayList;
 
+import matvidako.supertrianglecalculator.R;
+import matvidako.supertrianglecalculator.calculator.OnPropertyChangeListener;
+import matvidako.supertrianglecalculator.general.Utils;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,15 +21,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class GridItemAdapter extends BaseAdapter implements OnItemClickListener {
+public class GridItemCalculatorAdapter extends BaseAdapter implements OnItemClickListener {
 
 	private LayoutInflater inflater;
-	private int layoutId = R.layout.grid_item;
+	private int layoutId = R.layout.grid_item_calculator;
 	private ArrayList<ShapeProperty> properties = new ArrayList<ShapeProperty>();
 	private Context context;
 	private OnPropertyChangeListener onPropertyChangeListener = null;
 
-	public GridItemAdapter(Context context) {
+	public GridItemCalculatorAdapter(Context context) {
 		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
@@ -125,7 +128,7 @@ public class GridItemAdapter extends BaseAdapter implements OnItemClickListener 
 				} catch (Exception e) {
 				}
 				//switchViewVisibility(this);
-				GridItemAdapter.this.notifyDataSetChanged();
+				GridItemCalculatorAdapter.this.notifyDataSetChanged();
 				Utils.hideKeyboard(edit, context);
 			}
 			return true;

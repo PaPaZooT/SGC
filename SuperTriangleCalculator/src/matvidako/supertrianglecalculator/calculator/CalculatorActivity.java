@@ -1,7 +1,13 @@
-package matvidako.supertrianglecalculator;
+package matvidako.supertrianglecalculator.calculator;
 
 import java.util.ArrayList;
 
+import matvidako.supertrianglecalculator.R;
+import matvidako.supertrianglecalculator.general.DialogLauncher;
+import matvidako.supertrianglecalculator.general.Utils;
+import matvidako.supertrianglecalculator.shapes.GridItemCalculatorAdapter;
+import matvidako.supertrianglecalculator.shapes.ShapeProperty;
+import matvidako.supertrianglecalculator.shapes.Triangle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,7 +25,7 @@ public class CalculatorActivity extends Activity {
 
 	private GridView gridDefault, gridKnown, gridCalculated, gridCantCalculate;
 	private View headerKnown, headerCalculated, headerCantCalculate;
-	private GridItemAdapter adapterDefault, adapterKnown, adapterCalculated,
+	private GridItemCalculatorAdapter adapterDefault, adapterKnown, adapterCalculated,
 			adapterCantCalculate;
 
 	private ArrayList<ShapeProperty> allProperties,
@@ -28,11 +34,13 @@ public class CalculatorActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.calculator);
+		setContentView(R.layout.activity_calculator);
 		setupViews();
 		setupAdapters();
 		Explain.setup(this);
 		resetGridViews();
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -55,11 +63,11 @@ public class CalculatorActivity extends Activity {
 	private class MovePropertyChangeListener implements
 			OnPropertyChangeListener {
 
-		private GridItemAdapter from;
-		private GridItemAdapter to;
+		private GridItemCalculatorAdapter from;
+		private GridItemCalculatorAdapter to;
 
-		public MovePropertyChangeListener(GridItemAdapter from,
-				GridItemAdapter to) {
+		public MovePropertyChangeListener(GridItemCalculatorAdapter from,
+				GridItemCalculatorAdapter to) {
 			this.from = from;
 			this.to = to;
 		}
@@ -75,19 +83,19 @@ public class CalculatorActivity extends Activity {
 	}
 
 	private void setupAdapters() {
-		adapterDefault = new GridItemAdapter(this);
+		adapterDefault = new GridItemCalculatorAdapter(this);
 		gridDefault.setAdapter(adapterDefault);
 		gridDefault.setOnItemClickListener(adapterDefault);
 
-		adapterKnown = new GridItemAdapter(this);
+		adapterKnown = new GridItemCalculatorAdapter(this);
 		gridKnown.setAdapter(adapterKnown);
 		gridKnown.setOnItemClickListener(adapterKnown);
 
-		adapterCalculated = new GridItemAdapter(this);
+		adapterCalculated = new GridItemCalculatorAdapter(this);
 		gridCalculated.setAdapter(adapterCalculated);
 		gridCalculated.setOnItemClickListener(adapterCalculated);
 
-		adapterCantCalculate = new GridItemAdapter(this);
+		adapterCantCalculate = new GridItemCalculatorAdapter(this);
 		gridCantCalculate.setAdapter(adapterCantCalculate);
 		gridCantCalculate.setOnItemClickListener(adapterCantCalculate);
 
@@ -156,6 +164,9 @@ public class CalculatorActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
 		case R.id.action_calculate:
 			calculate();
 			Utils.hideKeyboard(gridCalculated, this);
