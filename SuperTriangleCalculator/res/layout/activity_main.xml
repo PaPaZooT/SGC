@@ -13,7 +13,7 @@
         android:horizontalSpacing="@dimen/spacing_calculator_grid"
         android:verticalSpacing="@dimen/spacing_calculator_grid"
         android:stretchMode="columnWidth"
-        android:numColumns="auto_fit"
+        android:numColumns="3"
         android:columnWidth="@dimen/column_width_main">
         
     </GridView>

@@ -79,38 +79,6 @@ public class Triangle {
 	public ArrayList<ShapeProperty> getProperties(){
 		return properties;
 	}
-	
-	/*
-	public Triangle(String a, String b, String c, String ha, String hb,
-			String hc, String alpha, String beta, String gamma, String A,
-			String P, String r, String R, boolean inDegrees, Context context) {
-
-		this.context = context;
-		sides[0] = toDoubleOrMinusOne(a);
-		sides[1] = toDoubleOrMinusOne(b);
-		sides[2] = toDoubleOrMinusOne(c);
-
-		heights[0] = toDoubleOrMinusOne(ha);
-		heights[1] = toDoubleOrMinusOne(hb);
-		heights[2] = toDoubleOrMinusOne(hc);
-
-		angles[0] = toDoubleOrMinusOne(alpha);
-		angles[1] = toDoubleOrMinusOne(beta);
-		angles[2] = toDoubleOrMinusOne(gamma);
-
-		this.inDegrees = inDegrees;
-		if (!inDegrees) {
-			for (int i = 0; i < 3; i++) {
-				if (isSet(angles[i]))
-					angles[i] = Math.toDegrees(angles[i]);
-			}
-		}
-
-		this.A = toDoubleOrMinusOne(A);
-		this.P = toDoubleOrMinusOne(P);
-		this.r = toDoubleOrMinusOne(r);
-		this.rCircumscribed = toDoubleOrMinusOne(R);
-	}*/
 
 	public boolean isValid() {
 		return sidesValid() && anglesValid();
