@@ -1,7 +1,14 @@
 package matvidako.supertrianglecalculator.shapes;
 
-public class ShapeProperty {
+import java.io.Serializable;
 
+public class ShapeProperty implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4013688861338547330L;
+	
 	private String name;
 	private double value;
 	int decimalPlaces = 4;//TOOD settings 
@@ -14,6 +21,10 @@ public class ShapeProperty {
 	public ShapeProperty(String name, double value){
 		this.name = name;
 		this.value = value;
+	}
+	
+	public void resetValue(){
+		this.value = -1.0f;
 	}
 	
 	public String getName() {

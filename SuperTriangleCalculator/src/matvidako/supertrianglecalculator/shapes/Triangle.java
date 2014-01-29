@@ -8,7 +8,7 @@ import matvidako.supertrianglecalculator.general.UtilsMath;
 import android.content.Context;
 
 //TODO equilateral triangle checks...
-public class Triangle {
+public class Triangle extends Shape{
 
 	public static interface Properties{
 		public static final String a = "a", b = "b", c = "c";
@@ -26,13 +26,48 @@ public class Triangle {
 	private double r = -1, rCircumscribed = -1;
 	private final double sumAngles = 180;
 
-	private boolean inDegrees;
+	public Triangle(ArrayList<ShapeProperty> properties, boolean inDegrees){
+		super(inDegrees);
+		setProperties(properties);
+		if (!inDegrees) {
+			for (int i = 0; i < 3; i++) {
+				if (isSet(angles[i]))
+					angles[i] = Math.toDegrees(angles[i]);
+			}
+		}
+	}
 
-	private Context context;
-
-	private ArrayList<ShapeProperty> properties = new ArrayList<ShapeProperty>();
-	
-	public Triangle(ArrayList<ShapeProperty> properties, boolean inDegrees, Context context){
+	@Override
+	public void setProperties(ArrayList<ShapeProperty> properties) {
+		this.properties.addAll(properties);
+		sides[0] = -1;
+		sides[1] = -1;
+		sides[2] = -1;
+		angles[0] = -1;
+		angles[1] = -1;
+		angles[2] = -1;
+		heights[0] = -1;
+		heights[1] = -1;
+		heights[2] = -1;
+		r = -1;
+		rCircumscribed = -1;
+		P = -1;
+		A = -1;
+		/*
+		sides[0] = getPropertyValue(Properties.a);
+		sides[1] = getPropertyValue(Properties.b);
+		sides[2] = getPropertyValue(Properties.c);
+		angles[0] = getPropertyValue(Properties.alpha);
+		angles[1] = getPropertyValue(Properties.beta);
+		angles[2] = getPropertyValue(Properties.gamma);
+		heights[0] = getPropertyValue(Properties.ha);
+		heights[1] = getPropertyValue(Properties.hb);
+		heights[2] = getPropertyValue(Properties.hc);
+		r = getPropertyValue(Properties.r);
+		rCircumscribed = getPropertyValue(Properties.R);
+		P = getPropertyValue(Properties.P);
+		A = getPropertyValue(Properties.A);*/
+		
 		for(ShapeProperty p : properties){
 			String name= p.getName();
 			if(name.equals(Properties.a)){
@@ -65,21 +100,18 @@ public class Triangle {
 				P = p.getValue();
 			}
 		}
-		
-		this.inDegrees = inDegrees;
-		if (!inDegrees) {
-			for (int i = 0; i < 3; i++) {
-				if (isSet(angles[i]))
-					angles[i] = Math.toDegrees(angles[i]);
-			}
-		}
-		this.context = context;
 	}
 	
-	public ArrayList<ShapeProperty> getProperties(){
-		return properties;
-	}
-
+	/*
+	private double getPropertyValue(String name){
+		int index = properties.indexOf(name);
+		if(index > -1){
+			return properties.get(index).getValue();
+		}
+		return -1;
+	}*/
+	
+	@Override
 	public boolean isValid() {
 		return sidesValid() && anglesValid();
 	}
@@ -97,6 +129,7 @@ public class Triangle {
 				.equalDouble(angles[0] + angles[1] + angles[2], sumAngles));
 	}
 
+	@Override
 	public void calculateAll() {
 		boolean anyCalc = false;
 		do {
@@ -465,23 +498,6 @@ public class Triangle {
 		return -1;
 	}
 
-	/*
-	private double toDoubleOrMinusOne(String s) {
-		double n;
-		try {
-			n = Double.parseDouble(s);
-			return n;
-		} catch (Exception e) {
-			return -1;
-		}
-	}*/
-
-	private String toStringOrDoesNotCompute(double d) {
-		if (isSet(d))
-			return Double.toString(d);
-		return "";
-	}
-
 	private boolean isSet(double n) {
 		return n > -0.1;
 	}
@@ -492,64 +508,6 @@ public class Triangle {
 				return false;
 		}
 		return true;
-	}
-
-	public String getA() {
-		return toStringOrDoesNotCompute(sides[0]);
-	}
-
-	public String getB() {
-		return toStringOrDoesNotCompute(sides[1]);
-	}
-
-	public String getC() {
-		return toStringOrDoesNotCompute(sides[2]);
-	}
-
-	public String getHa() {
-		return toStringOrDoesNotCompute(heights[0]);
-	}
-
-	public String getHb() {
-		return toStringOrDoesNotCompute(heights[1]);
-	}
-
-	public String getHc() {
-		return toStringOrDoesNotCompute(heights[2]);
-	}
-
-	public String getAlpha() {
-		if (isSet(angles[0]) && !inDegrees)
-			return Double.toString(Math.toRadians(angles[0]));
-		return toStringOrDoesNotCompute(angles[0]);
-	}
-
-	public String getBeta() {
-		if (isSet(angles[1]) && !inDegrees)
-			return Double.toString(Math.toRadians(angles[1]));
-		return toStringOrDoesNotCompute(angles[1]);
-	}
-
-	public String getGamma() {
-		if (isSet(angles[2]) && !inDegrees)
-			return Double.toString(Math.toRadians(angles[2]));
-		return toStringOrDoesNotCompute(angles[2]);
-	}
-
-	public String getArea() {
-		return toStringOrDoesNotCompute(A);
-	}
-
-	public String getPerimeter() {
-		return toStringOrDoesNotCompute(P);
-	}
-
-	public String getr() {
-		return toStringOrDoesNotCompute(r);
-	}
-
-	public String getR() {
-		return toStringOrDoesNotCompute(rCircumscribed);
 	}
 
 }
